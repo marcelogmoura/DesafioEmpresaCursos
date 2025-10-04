@@ -1,0 +1,6 @@
+@DesafioEmpresaCursos.API_HostAddress = http://localhost:5206
+
+GET {{DesafioEmpresaCursos.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
