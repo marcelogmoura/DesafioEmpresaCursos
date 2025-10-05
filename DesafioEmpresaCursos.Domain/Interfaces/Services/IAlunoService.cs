@@ -5,8 +5,10 @@ using DesafioEmpresaCursos.Domain.Entities;
 namespace DesafioEmpresaCursos.Domain.Interfaces.Services
 {
     public interface IAlunoService
-    {
-        //AlunoResponse Create(AlunoRequest dto);
+    {        
         Task<AlunoResponse> Create(AlunoRequest dto);
+        Task<AlunoResponse> GetById(Guid id);
+        Task<IEnumerable<AlunoResponse>> GetAll();
+        Task Delete (Guid id);
     }
 }

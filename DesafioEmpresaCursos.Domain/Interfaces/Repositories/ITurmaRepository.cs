@@ -5,5 +5,6 @@ namespace DesafioEmpresaCursos.Domain.Interfaces.Repositories
     public interface ITurmaRepository : IRepository<Turma>
     {
         Task<List<Turma>> GetByIds(List<Guid> ids);
+        Task<Turma> GetByIdIncludingAlunos(Guid id);
     }
 }

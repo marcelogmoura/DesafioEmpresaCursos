@@ -32,5 +32,27 @@ namespace DesafioEmpresaCursos.API.Controllers
                 return StatusCode(500, "Erro interno do servidor: " + ex.Message);
             }
         }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            try
+            {
+                await _alunoService.Delete(id);
+                return NoContent();
+            }
+            catch (KeyNotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (Exception ex)
+            {              
+                return StatusCode(500, "Erro interno do servidor: " + ex.Message);
+            }
+        }
     }
 }

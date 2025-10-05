@@ -18,5 +18,12 @@ namespace DesafioEmpresaCursos.Infra.Repositories
                 .Include(t => t.Alunos)
                 .ToListAsync();
         }
+
+        public async Task<Turma> GetByIdIncludingAlunos(Guid id)
+        {
+            return await DbSet
+                .Include(t => t.Alunos)
+                .FirstOrDefaultAsync(t => t.Id == id);
+        }
     }
 }
