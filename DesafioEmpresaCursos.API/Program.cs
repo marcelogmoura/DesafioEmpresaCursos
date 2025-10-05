@@ -1,19 +1,37 @@
-var builder = WebApplication.CreateBuilder(args);
+using DesafioEmpresaCursos.Domain.Interfaces.Repositories;
+using DesafioEmpresaCursos.Domain.Interfaces.Services;
+using DesafioEmpresaCursos.Domain.Services;
+using DesafioEmpresaCursos.Infra.Data.Contexts;
+using DesafioEmpresaCursos.Infra.Repositories;
+using Microsoft.EntityFrameworkCore;
 
-// Add services to the container.
+
+
+var builder = WebApplication.CreateBuilder(args);
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseSqlServer(connectionString));
+
+builder.Services.AddScoped<IAlunoRepository, AlunoRepository>();
+builder.Services.AddScoped<ITurmaRepository, TurmaRepository>();
+
+builder.Services.AddScoped<IAlunoService, AlunoService>();
 
 builder.Services.AddControllers();
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-builder.Services.AddOpenApi();
+
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.MapOpenApi();
+    app.UseSwagger();
+    app.UseSwaggerUI();
 }
 
+app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
