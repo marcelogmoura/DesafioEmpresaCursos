@@ -2,6 +2,7 @@
 {
     public class TurmaRequest
     {
+
         public string? NumeroTurma { get; set; }
         public int AnoLetivo { get; set; }
     }

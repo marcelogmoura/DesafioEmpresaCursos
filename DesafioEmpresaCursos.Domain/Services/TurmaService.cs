@@ -16,10 +16,7 @@ namespace DesafioEmpresaCursos.Domain.Services
             _turmaRepository = turmaRepository;
         }
 
-        // ----------------------------------------------------
-        // C - CREATE
-        // ----------------------------------------------------
-        public async Task<TurmaResponse> Create(TurmaCreateRequest dto)
+        public async Task<TurmaResponse> Create(TurmaRequest dto)
         {
             var turma = new Turma
             {
@@ -27,9 +24,7 @@ namespace DesafioEmpresaCursos.Domain.Services
                 NumeroTurma = dto.NumeroTurma,
                 AnoLetivo = dto.AnoLetivo
             };
-
-            // Futuramente, adicionaremos a validação de formato (FluentValidation) aqui.
-
+            
             await _turmaRepository.Add(turma);
 
             return new TurmaResponse
@@ -40,9 +35,7 @@ namespace DesafioEmpresaCursos.Domain.Services
             };
         }
 
-        // ----------------------------------------------------
-        // R - READ
-        // ----------------------------------------------------
+
         public async Task<TurmaResponse> GetById(Guid id)
         {
             var turma = await _turmaRepository.GetById(id);
@@ -72,9 +65,7 @@ namespace DesafioEmpresaCursos.Domain.Services
             }).ToList();
         }
 
-        // ----------------------------------------------------
-        // U - UPDATE (Implementação básica)
-        // ----------------------------------------------------
+     
         public async Task<TurmaResponse> Update(Guid id, TurmaRequest dto)
         {
             var turma = await _turmaRepository.GetById(id);
@@ -83,11 +74,7 @@ namespace DesafioEmpresaCursos.Domain.Services
             {
                 throw new KeyNotFoundException($"Turma com Id {id} não encontrada para atualização.");
             }
-
-            // Aplica as alterações
-            turma.NumeroTurma = dto.NumeroTurma;
-            turma.AnoLetivo = dto.AnoLetivo;
-
+        
             await _turmaRepository.Update(turma);
 
             return new TurmaResponse
@@ -97,10 +84,11 @@ namespace DesafioEmpresaCursos.Domain.Services
                 AnoLetivo = turma.AnoLetivo
             };
         }
+               
 
         public async Task<string> Delete(Guid id)
         {
-            var turma = await ((TurmaRepository)_turmaRepository).GetByIdIncludingAlunos(id);
+            var turma = await _turmaRepository.GetByIdIncludingAlunos(id);
 
             if (turma == null)
             {
@@ -119,25 +107,19 @@ namespace DesafioEmpresaCursos.Domain.Services
             return numeroTurma;
         }
 
-        // ----------------------------------------------------
-        // MÉTODO INTERNO (Já definido)
-        // ----------------------------------------------------
+
         public async Task<List<Turma>> GetTurmasByIds(List<Guid> ids)
         {
-            // ... (implementação existente)
-            // OBS: O código GetTurmasByIds no TurmaRepository já faz o .Include(t => t.Alunos),
-            // então não precisamos nos preocupar com a inclusão aqui.
 
             var turmas = await _turmaRepository.GetByIds(ids);
 
-            // Validação: Checar se todas as turmas solicitadas foram encontradas
+
             if (turmas.Count != ids.Count)
             {
                 var turmasNaoEncontradas = ids.Except(turmas.Select(t => t.Id)).ToList();
                 throw new ArgumentException($"Algumas turmas não foram encontradas: {string.Join(", ", turmasNaoEncontradas)}");
             }
 
-            // REGRA DE NEGÓCIO: Uma turma não pode ter mais de 5 alunos
             var turmasComCapacidadeExcedida = turmas
                 .Where(t => t.Alunos.Count >= 5)
                 .Select(t => t.NumeroTurma)
