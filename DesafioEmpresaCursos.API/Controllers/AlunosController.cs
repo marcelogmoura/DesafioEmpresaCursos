@@ -16,19 +16,21 @@ namespace DesafioEmpresaCursos.API.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create([FromBody] AlunoRequest dto)
+        public async Task<IActionResult> Create([FromBody] AlunoRequest dto)
         {
             try
             {
-                var response = _alunoService.Create(dto);
-                return StatusCode(201, dto);
+                var response = await _alunoService.Create(dto);
+                return StatusCode(201, response);
             }
-            catch (Exception ex)
+            catch (ArgumentException ex) 
             {
                 return BadRequest(ex.Message);
             }
-
-
+            catch (Exception ex)
+            {              
+                return StatusCode(500, "Erro interno do servidor: " + ex.Message);
+            }
         }
     }
 }

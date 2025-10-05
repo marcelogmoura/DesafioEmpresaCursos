@@ -5,7 +5,8 @@ using DesafioEmpresaCursos.Domain.Entities;
 namespace DesafioEmpresaCursos.Domain.Interfaces.Services
 {
     public interface IAlunoService
-    { 
-        AlunoResponse Create(AlunoRequest dto);
+    {
+        //AlunoResponse Create(AlunoRequest dto);
+        Task<AlunoResponse> Create(AlunoRequest dto);
     }
 }

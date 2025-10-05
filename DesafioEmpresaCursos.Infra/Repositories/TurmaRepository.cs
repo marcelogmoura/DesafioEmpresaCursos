@@ -1,6 +1,7 @@
 ﻿using DesafioEmpresaCursos.Domain.Entities;
 using DesafioEmpresaCursos.Domain.Interfaces.Repositories;
 using DesafioEmpresaCursos.Infra.Data.Contexts;
+using Microsoft.EntityFrameworkCore;
 
 namespace DesafioEmpresaCursos.Infra.Repositories
 {
@@ -8,6 +9,14 @@ namespace DesafioEmpresaCursos.Infra.Repositories
     {
         public TurmaRepository(AppDbContext context) : base(context)
         {
+        }
+
+        public async Task<List<Turma>> GetByIds(List<Guid> ids)
+        { 
+            return await DbSet
+                .Where(t => ids.Contains(t.Id))
+                .Include(t => t.Alunos)
+                .ToListAsync();
         }
     }
 }
