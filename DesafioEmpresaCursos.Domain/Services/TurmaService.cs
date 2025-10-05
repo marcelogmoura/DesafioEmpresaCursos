@@ -65,8 +65,7 @@ namespace DesafioEmpresaCursos.Domain.Services
             }).ToList();
         }
 
-     
-        public async Task<TurmaResponse> Update(Guid id, TurmaRequest dto)
+        public async Task<TurmaResponse> Update(Guid id, TurmaUpdateRequest dto) 
         {
             var turma = await _turmaRepository.GetById(id);
 
@@ -74,7 +73,18 @@ namespace DesafioEmpresaCursos.Domain.Services
             {
                 throw new KeyNotFoundException($"Turma com Id {id} não encontrada para atualização.");
             }
-        
+                      
+            
+            if (!string.IsNullOrWhiteSpace(dto.NumeroTurma))
+            {
+                turma.NumeroTurma = dto.NumeroTurma;
+            }
+                        
+            if (dto.AnoLetivo.HasValue)
+            {            
+                turma.AnoLetivo = dto.AnoLetivo.Value;
+            }
+                        
             await _turmaRepository.Update(turma);
 
             return new TurmaResponse
@@ -84,8 +94,7 @@ namespace DesafioEmpresaCursos.Domain.Services
                 AnoLetivo = turma.AnoLetivo
             };
         }
-               
-
+                
         public async Task<string> Delete(Guid id)
         {
             var turma = await _turmaRepository.GetByIdIncludingAlunos(id);

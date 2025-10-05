@@ -60,9 +60,9 @@ namespace DesafioEmpresaCursos.API.Controllers
                 return StatusCode(500, "Erro interno do servidor: " + ex.Message);
             }
         }
-                
+        
         [HttpPut("{id:guid}")]
-        public async Task<IActionResult> Update(Guid id, [FromBody] TurmaRequest dto)
+        public async Task<IActionResult> Update(Guid id, [FromBody] TurmaUpdateRequest dto) 
         {
             try
             {
@@ -78,7 +78,8 @@ namespace DesafioEmpresaCursos.API.Controllers
                 return BadRequest(ex.Message);
             }
         }
-                
+        
+
         [HttpDelete("{id:guid}")]
         public async Task<IActionResult> Delete(Guid id)
         {
