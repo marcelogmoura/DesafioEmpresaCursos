@@ -1,69 +1,70 @@
-# Desafio Técnico - Empresa de Cursos
+# Desafio TÃ©cnico - Empresa de Cursos
 
 ![.NET](https://img.shields.io/badge/.NET-9.0-blueviolet)
 ![Database](https://img.shields.io/badge/SQL_Server-EC1B24?style=flat&logo=microsoftsqlserver&logoColor=white)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-Este projeto é a implementação de uma API RESTful para um sistema de gerenciamento de **Alunos e Turmas** de uma empresa de cursos, utilizando uma arquitetura baseada em **Domain-Driven Design (DDD)**. O objetivo foi criar o CRUD (Create, Read, Update, Delete) completo, seguindo as regras de negócio complexas especificadas no desafio técnico.
+Este projeto Ã© a implementaÃ§Ã£o de uma API RESTful para um sistema de gerenciamento de **Alunos e Turmas** de uma empresa de cursos, utilizando uma arquitetura baseada em **Domain-Driven Design (DDD)**. O objetivo foi criar o CRUD (Create, Read, Update, Delete) completo, seguindo as regras de negÃ³cio complexas especificadas no desafio tÃ©cnico.
 
-O sistema foi desenvolvido como parte de um desafio técnico prático para algum processo seletivo que fiz para estudar.
+O sistema foi desenvolvido como parte de um desafio tÃ©cnico prÃ¡tico para algum processo seletivo que fiz para praticar.
 
-## Funcionalidades Principais (CRUD Completo)
+> ğŸ“„ **DocumentaÃ§Ã£o Completa do Desafio:** As regras de negÃ³cio e requisitos estÃ£o detalhados no arquivo [DesafioEmpresaCursos.pdf](./Pdf/DesafioEmpresaCursos.pdf).
 
--   ?? **Cadastro de Alunos:** Permite a criação, consulta, alteração e exclusão de alunos.
--   ?? **Matrícula:** Permite associar alunos a múltiplas turmas durante o cadastro (relações N:N).
--   ?? **Gerenciamento de Turmas:** Permite a criação, consulta, alteração e exclusão de turmas.
--   ? **Documentação da API:** A API é autodocumentada utilizando Swagger (OpenAPI).
+## ğŸŒŸ Funcionalidades Principais (CRUD Completo)
 
-## Regras de Negócio Implementadas
+-   ğŸ“ **Cadastro de Alunos:** Permite a criaÃ§Ã£o, consulta, alteraÃ§Ã£o e exclusÃ£o de alunos.
+-   âœï¸ **MatrÃ­cula:** Permite associar alunos a mÃºltiplas turmas durante o cadastro (relaÃ§Ãµes N:N).
+-   ğŸ“š **Gerenciamento de Turmas:** Permite a criaÃ§Ã£o, consulta, alteraÃ§Ã£o e exclusÃ£o de turmas.
+-   âœ¨ **DocumentaÃ§Ã£o da API:** A API Ã© autodocumentada utilizando Swagger (OpenAPI).
 
-O sistema segue rigorosamente as seguintes regras de negócio obrigatórias:
+## ğŸ›¡ï¸ Regras de NegÃ³cio Implementadas
 
-1.  **Matrícula Mínima:** Aluno deve ser cadastrado com no mínimo 1 turma.
-2.  **Validação de Dados:** O e-mail e CPF do aluno não podem ser inválidos.
-3.  **Limite de Alunos:** Uma turma não pode ter mais de 5 alunos.
-4.  **Matrícula Única:** Aluno pode se matricular em diversas turmas, mas não mais de 1x na mesma turma.
-5.  **Exclusão de Aluno:** Aluno não pode ser excluído se estiver associado em uma turma.
-6.  **Exclusão de Turma:** Turma não pode ser excluída se possuir alunos.
+O sistema segue rigorosamente as seguintes regras de negÃ³cio obrigatÃ³rias:
 
-## Tecnologias Utilizadas
+1.  **MatrÃ­cula MÃ­nima:** Aluno deve ser cadastrado com no mÃ­nimo 1 turma.
+2.  **ValidaÃ§Ã£o de Dados:** O e-mail e CPF do aluno nÃ£o podem ser invÃ¡lidos.
+3.  **Limite de Alunos:** Uma turma nÃ£o pode ter mais de 5 alunos.
+4.  **MatrÃ­cula Ãšnica:** Aluno pode se matricular em diversas turmas, mas nÃ£o mais de 1x na mesma turma.
+5.  **ExclusÃ£o de Aluno:** Aluno nÃ£o pode ser excluÃ­do se estiver associado em uma turma.
+6.  **ExclusÃ£o de Turma:** Turma nÃ£o pode ser excluÃ­da se possuir alunos.
 
--   **.NET 9** e **ASP.NET Core**: Framework principal para a construção da API.
+## ğŸ› ï¸ Tecnologias Utilizadas
+
+-   **.NET 9** e **ASP.NET Core**: Framework principal para a construÃ§Ã£o da API.
 -   **Entity Framework Core 9**: ORM para acesso a dados com a metodologia Code First Mapping.
--   **SQL Server**: Banco de dados relacional para persistência dos dados.
+-   **SQL Server**: Banco de dados relacional para persistÃªncia dos dados.
 -   **DDD (Domain-Driven Design)**: Arquitetura em camadas (Domain, Infra, API).
--   **FluentValidation**: Biblioteca para validações de domínio.
--   **Docker e Docker Compose**: Para containerização da aplicação e do banco de dados.
+-   **FluentValidation**: Biblioteca para validaÃ§Ãµes de domÃ­nio.
+-   **Docker e Docker Compose**: Para containerizaÃ§Ã£o da aplicaÃ§Ã£o e do banco de dados.
 
-## Pré-requisitos
+## âš™ï¸ PrÃ©-requisitos
 
 -   [.NET 9 SDK](https://dotnet.microsoft.com/download/dotnet/9.0)
--   [Docker](https://www.docker.com/products/docker-desktop/) e [Docker Compose](https://docs.docker.com/compose/install/) (para execução via container)
+-   [Docker](https://www.docker.com/products/docker-desktop/) e [Docker Compose](https://docs.docker.com/compose/install/) (para execuÃ§Ã£o via container)
 
-## Como Executar o Projeto
+## â–¶ï¸ Como Executar o Projeto
 
 ### 1. Usando Docker (Recomendado)
 
-O Docker simplifica a configuração do ambiente, incluindo a base de dados SQL Server.
+O Docker simplifica a configuraÃ§Ã£o do ambiente, incluindo a base de dados SQL Server.
 
-1.  **Clone o repositório:**
+1.  **Clone o repositÃ³rio:**
     ```bash
-    git clone [URL-DO-SEU-REPOSITÓRIO]
+    git clone [URL-DO-SEU-REPOSITÃ“RIO]
     cd DesafioEmpresaCursos
     ```
 
 2.  **Verifique/Edite o arquivo `docker-compose.yml`:**
-    A senha padrão do SQL Server está definida como `"Your_Strong_Password_Here_!23"`. Se desejar alterá-la, edite o valor de `SA_PASSWORD` e `ConnectionStrings__DefaultConnection` no `docker-compose.yml`.
+    A senha padrÃ£o do SQL Server estÃ¡ definida como `"Your_Strong_Password_Here_!23"`. Se desejar alterÃ¡-la, edite o valor de `SA_PASSWORD` e `ConnectionStrings__DefaultConnection` no `docker-compose.yml`.
 
 3.  **Construa e inicie os containers:**
     ```bash
     docker-compose up --build -d
     ```
-    *Obs: O contêiner SQL Server pode levar alguns minutos para iniciar completamente.*
 
 4.  **Acesse a API:**
-    A aplicação estará disponível na porta `5206` do seu host.
-    A documentação do **Swagger** pode ser acessada em:
+    A aplicaÃ§Ã£o estarÃ¡ disponÃ­vel na porta `5206` do seu host.
+    A documentaÃ§Ã£o do **Swagger** pode ser acessada em:
     [http://localhost:5206/swagger/index.html](http://localhost:5206/swagger/index.html)
 
 5.  **Para parar os containers:**
@@ -73,14 +74,14 @@ O Docker simplifica a configuração do ambiente, incluindo a base de dados SQL Se
 
 ### 2. Rodando Localmente
 
-Para executar o projeto diretamente na sua máquina, sem Docker.
+Para executar o projeto diretamente na sua mÃ¡quina, sem Docker.
 
-1.  **Clone o repositório.**
+1.  **Clone o repositÃ³rio.**
 
 2.  **Configure o Banco de Dados:**
-    A string de conexão padrão (em `DesafioEmpresaCursos.API/appsettings.json`) está configurada para usar o LocalDB do SQL Server:
+    A string de conexÃ£o padrÃ£o (em `DesafioEmpresaCursos.API/appsettings.json`) estÃ¡ configurada para usar o LocalDB do SQL Server:
     `Server=(localdb)\\mssqllocaldb;Database=DBDesafioCurso;...`
-    Certifique-se de que o SQL Server LocalDB está instalado e funcionando.
+    Certifique-se de que o SQL Server LocalDB estÃ¡ instalado e funcionando.
 
 3.  **Aplique as Migrations (a partir da pasta `DesafioEmpresaCursos.Infra`):**
     ```bash
@@ -95,38 +96,45 @@ Para executar o projeto diretamente na sua máquina, sem Docker.
     ```
 
 5.  **Acesse a API:**
-    A aplicação estará disponível em `http://localhost:5206` e o Swagger em [http://localhost:5206/swagger/index.html](http://localhost:5206/swagger/index.html).
+    A aplicaÃ§Ã£o estarÃ¡ disponÃ­vel em `http://localhost:5206` e o Swagger em [http://localhost:5206/swagger/index.html](http://localhost:5206/swagger/index.html).
 
-## Estrutura do Projeto (DDD)
+## ğŸ“‚ Estrutura do Projeto (DDD)
 
-O projeto segue a arquitetura de Domínio-Dirigida (DDD):
+O projeto segue a arquitetura de DomÃ­nio-Dirigida (DDD):
 
--   **DesafioEmpresaCursos.Domain**: Contém as entidades de negócio (`Aluno`, `Turma`), DTOs, interfaces de repositórios e serviços, e as validações de domínio.
--   **DesafioEmpresaCursos.Infra**: Camada de acesso a dados. Contém as implementações dos repositórios (EF Core), o `AppDbContext` e os Mapeamentos (Code First).
--   **DesafioEmpresaCursos.API**: Camada de apresentação, com os controladores, injeção de dependência (`Program.cs`) e configuração do Swagger.
+-   **DesafioEmpresaCursos.Domain**: ContÃ©m as entidades de negÃ³cio, DTOs, interfaces de repositÃ³rios e serviÃ§os, e as validaÃ§Ãµes de domÃ­nio.
+-   **DesafioEmpresaCursos.Infra**: Camada de acesso a dados. ContÃ©m as implementaÃ§Ãµes dos repositÃ³rios (EF Core), o `AppDbContext` e os Mapeamentos (Code First).
+-   **DesafioEmpresaCursos.API**: Camada de apresentaÃ§Ã£o, com os controladores, injeÃ§Ã£o de dependÃªncia (`Program.cs`) e configuraÃ§Ã£o do Swagger.
 
-## Endpoints da API
+## ğŸ”— Endpoints da API
 
-A seguir, a lista de endpoints disponíveis:
+A seguir, a lista de endpoints disponÃ­veis:
 
-| Verbo | Rota | Descrição |
+| Verbo | Rota | DescriÃ§Ã£o |
 | :--- | :--- | :--- |
-| `POST` | `/api/Alunos` | Cadastra um novo aluno (com matrícula em turmas). |
+| `POST` | `/api/Alunos` | Cadastra um novo aluno (com matrÃ­cula em turmas). |
 | `GET` | `/api/Alunos` | Lista todos os alunos cadastrados. |
-| `GET` | `/api/Alunos/{id}` | Obtém os detalhes de um aluno específico por ID. |
+| `GET` | `/api/Alunos/{id}` | ObtÃ©m os detalhes de um aluno especÃ­fico por ID. |
 | `PUT` | `/api/Alunos/{id}` | Atualiza nome e/ou e-mail de um aluno existente (Update Parcial). |
-| `DELETE` | `/api/Alunos/{id}` | Exclui um aluno (se não houver turmas associadas). |
+| `DELETE` | `/api/Alunos/{id}` | Exclui um aluno (se nÃ£o houver turmas associadas). |
 | `POST` | `/api/Turmas` | Cadastra uma nova turma. |
 | `GET` | `/api/Turmas` | Lista todas as turmas cadastradas. |
-| `GET` | `/api/Turmas/{id}` | Obtém os detalhes de uma turma específica por ID. |
-| `PUT` | `/api/Turmas/{id}` | Atualiza o número e/ou ano letivo de uma turma (Update Parcial). |
-| `DELETE` | `/api/Turmas/{id}` | Exclui uma turma (se não houver alunos matriculados). |
+| `GET` | `/api/Turmas/{id}` | ObtÃ©m os detalhes de uma turma especÃ­fica por ID. |
+| `PUT` | `/api/Turmas/{id}` | Atualiza o nÃºmero e/ou ano letivo de uma turma (Update Parcial). |
+| `DELETE` | `/api/Turmas/{id}` | Exclui uma turma (se nÃ£o houver alunos matriculados). |
 
 ---
 
-## Autor
+## ğŸ‘¤ Autor
 
-**Marcelo Moura**
+ğŸ‘¨â€ğŸ’» **Autor:** Marcelo Moura 
 
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/marcelogmoura/)
-[![GitHub](https://imgshields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/marcelogmoura)
+ğŸ“§ **Email:** [mgmoura@gmail.com](mailto:mgmoura@gmail.com)   
+ğŸ“§ **Email:** [admin@allriders.com.br](mailto:admin@allriders.com.br)   
+ğŸ± **GitHub:** [github.com/marcelogmoura](https://github.com/marcelogmoura)   
+ğŸ”— **LinkedIn:** [linkedin.com/in/marcelogmoura](https://www.linkedin.com/in/marcelogmoura/)   
+
+
+
+
+
