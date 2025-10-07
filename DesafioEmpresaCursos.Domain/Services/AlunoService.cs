@@ -25,6 +25,17 @@ namespace DesafioEmpresaCursos.Domain.Services
                 throw new ArgumentException("O aluno deve ser matriculado em pelo menos uma turma.");
             }
 
+            var turmasDuplicadas = dto.TurmasId
+                .GroupBy(id => id)
+                .Where(g => g.Count() > 1)
+                .Select(g => g.Key)
+                .ToList();
+
+            if (turmasDuplicadas.Any())
+            {
+                throw new ArgumentException($"O aluno não pode se matricular mais de 1x na mesma turma. IDs duplicados encontrados: {string.Join(", ", turmasDuplicadas)}");
+            }
+
             var turmas = await _turmaService.GetTurmasByIds(dto.TurmasId.ToList());
 
             var aluno = new Aluno

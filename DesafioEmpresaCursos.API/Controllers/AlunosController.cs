@@ -79,7 +79,6 @@ namespace DesafioEmpresaCursos.API.Controllers
             }
         }
 
-
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
@@ -92,7 +91,6 @@ namespace DesafioEmpresaCursos.API.Controllers
             {
                 return StatusCode(500, "Erro interno do servidor: " + ex.Message);
             }
-
         }
 
         [HttpGet("{id:guid}")]
@@ -113,5 +111,4 @@ namespace DesafioEmpresaCursos.API.Controllers
             }
         }
     }
-
 }
