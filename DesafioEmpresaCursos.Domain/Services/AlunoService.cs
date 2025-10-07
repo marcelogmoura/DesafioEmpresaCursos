@@ -3,6 +3,7 @@ using DesafioEmpresaCursos.Domain.Dtos.Response;
 using DesafioEmpresaCursos.Domain.Entities;
 using DesafioEmpresaCursos.Domain.Interfaces.Repositories;
 using DesafioEmpresaCursos.Domain.Interfaces.Services;
+using System.Net.Mail;
 
 namespace DesafioEmpresaCursos.Domain.Services
 {
@@ -63,14 +64,73 @@ namespace DesafioEmpresaCursos.Domain.Services
             await _alunoRepository.Delete(id);
         }
 
-        public Task<IEnumerable<AlunoResponse>> GetAll()
+        public async Task<IEnumerable<AlunoResponse>> GetAll()
         {
-            throw new NotImplementedException();
+            var alunos = await _alunoRepository.GetAll();
+
+            return alunos.Select(aluno => new AlunoResponse
+            {
+                Id = aluno.Id,
+                Nome = aluno.Nome,
+                Cpf = aluno.Cpf,
+                Email = aluno.Email
+            });
         }
 
-        public Task<AlunoResponse> GetById(Guid id)
+        public async Task<AlunoResponse> GetById(Guid id)
         {
-            throw new NotImplementedException();
+            var aluno = await _alunoRepository.GetById(id);
+
+            if (aluno == null)
+            {
+                throw new KeyNotFoundException($"Aluno com Id {id} não encontrado.");
+            }
+
+            return new AlunoResponse
+            {
+                Id = aluno.Id,
+                Nome = aluno.Nome,
+                Cpf = aluno.Cpf,
+                Email = aluno.Email
+            };
+        }
+
+        public async Task<AlunoResponse> Update(Guid id, AlunoUpdateRequest dto)
+        {            
+            var aluno = await _alunoRepository.GetById(id);
+
+            if (aluno == null)
+                throw new KeyNotFoundException($"Aluno com Id {id} não encontrado para atualização.");
+                     
+            // Atualiza Nome (apenas se for fornecido)
+            if (!string.IsNullOrWhiteSpace(dto.Nome))
+            {
+                aluno.Nome = dto.Nome;
+            }
+
+            // Atualiza Email (apenas se for fornecido)
+            if (!string.IsNullOrWhiteSpace(dto.Email))
+            {
+                try
+                {                    
+                    var mailAddress = new MailAddress(dto.Email);
+                }
+                catch (FormatException)
+                {
+                    throw new ArgumentException("O formato do e-mail fornecido é inválido.");
+                }
+                aluno.Email = dto.Email;
+            }
+                        
+            await _alunoRepository.Update(aluno);
+
+            return new AlunoResponse
+            {
+                Id = aluno.Id,
+                Nome = aluno.Nome,
+                Cpf = aluno.Cpf,
+                Email = aluno.Email
+            };
         }
     }
 }
