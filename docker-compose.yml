@@ -1,0 +1,32 @@
+services:
+  
+  mssql:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: db_desafio_cursos
+    environment:
+      SA_PASSWORD: "Your_Strong_Password_Here_!23" 
+      ACCEPT_EULA: "Y"
+    ports:
+      - "1433:1433" 
+    volumes:
+      - mssql_data:/var/opt/mssql 
+    restart: always
+  
+  api:
+    image: desafiocursos_api
+    container_name: desafio_cursos_api
+    build:
+      context: .
+      dockerfile: DesafioEmpresaCursos.API/Dockerfile # Caminho relativo à raiz da solução
+    ports:
+      - "5206:8080" 
+    environment:
+      ConnectionStrings__DefaultConnection: "Server=mssql;Database=DBDesafioCurso;User Id=sa;Password=Your_Strong_Password_Here_!23;Encrypt=False"
+      ASPNETCORE_ENVIRONMENT: "Development"
+    depends_on:
+      - mssql 
+    restart: always
+    
+volumes:
+  mssql_data:
+    driver: local

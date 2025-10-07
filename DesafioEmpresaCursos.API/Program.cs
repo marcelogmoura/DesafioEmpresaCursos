@@ -5,16 +5,11 @@ using DesafioEmpresaCursos.Infra.Data.Contexts;
 using DesafioEmpresaCursos.Infra.Repositories;
 using Microsoft.EntityFrameworkCore;
 
-
-
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(connectionString));
-
-
-
 
 builder.Services.AddScoped<IAlunoRepository, AlunoRepository>();
 builder.Services.AddScoped<ITurmaRepository, TurmaRepository>();
